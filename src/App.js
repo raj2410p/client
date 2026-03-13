@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./App.css";
 
-const API = "http://localhost:5000/api/journal";
+const API = "/api/journal";
 
 function App() {
   const [userId, setUserId] = useState("user1");
