@@ -5,6 +5,11 @@ The system extracts emotional tone, keywords, and summaries, and generates insig
 
 ---
 
+## 🚀 Live Demo
+
+
+🌐 [Deployed on Heroku](https://journal-ai-app-b6ebc2a7736d.herokuapp.com/)  
+
 ## Features
 
 - Create journal entries
