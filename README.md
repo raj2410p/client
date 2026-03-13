@@ -1,70 +1,203 @@
-# Getting Started with Create React App
+# AI Journal – Full Stack Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An AI-powered journaling application that allows users to write journal entries and analyze them using a Large Language Model (Gemini).  
+The system extracts emotional tone, keywords, and summaries, and generates insights about the user's journaling patterns.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Create journal entries
+- Analyze journal text using an LLM (Gemini API)
+- Extract emotion, keywords, and summary
+- Store analysis results in database
+- Cache LLM responses to avoid repeated API calls
+- Generate user insights
+- Full REST API backend
+- React frontend interface
+- Automated backend tests with Jest + Supertest
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+### Backend
+- Node.js
+- Express
+- SQLite (`better-sqlite3`)
+- Gemini API (`@google/genai`)
+- Jest
+- Supertest
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
+- React
+- Axios
 
-### `npm run build`
+### Database
+- SQLite
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Project Structure
+fullStackAssignment
+│
+├── backend
+│ └── src
+│ ├── controllers
+│ │ └── journalController.js
+│ ├── routes
+│ │ └── journalRoutes.js
+│ ├── services
+│ │ └── geminiServices.js
+│ ├── db
+│ │ └── database.js
+│ ├── test
+│ │ └── journal.test.js
+│ ├── app.js
+│ └── server.js
+│
+├── client
+│ └── src
+│ ├── App.js
+│ └── components
+│
+├── README.md
+└── ARCHITECTURE.md
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Setup Instructions
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 1. Clone Repository
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+git clone <repo-url>
+cd fullStackAssignment
+Backend Setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Navigate to backend folder:
 
-## Learn More
+cd backend/src
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Install dependencies:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+npm install
 
-### Code Splitting
+Create .env file:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+GEMINI_API_KEY=your_api_key_here
 
-### Analyzing the Bundle Size
+Start backend:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+npm run dev
 
-### Making a Progressive Web App
+Backend runs at:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+http://localhost:5000
+Frontend Setup
 
-### Advanced Configuration
+Open a new terminal and navigate to client:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+cd client
+npm install
+npm start
 
-### Deployment
+Frontend runs at:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+http://localhost:3000
+API Endpoints
+Create Journal Entry
+POST /api/journal
 
-### `npm run build` fails to minify
+Body:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+{
+  "userId": "user1",
+  "ambience": "rain",
+  "text": "Today I felt calm listening to the rain."
+}
+Get Entries
+GET /api/journal/:userId
+
+Example:
+
+GET /api/journal/user1
+Analyze Entry
+POST /api/journal/analyze
+
+Body:
+
+{
+  "journalId": 1
+}
+
+Response:
+
+{
+  "journalId": 1,
+  "emotion": "calm",
+  "keywords": ["calm","rain","listening"],
+  "summary": "The author felt calm listening to the rain.",
+  "cached": false
+}
+Get Insights
+GET /api/journal/insights/:userId
+
+Response:
+
+{
+  "totalEntries": 1,
+  "topEmotion": "calm",
+  "mostUsedAmbience": "rain",
+  "recentKeywords": ["calm","rain","listening"]
+}
+Testing
+
+Run backend tests:
+
+npm test
+
+Tests use:
+
+Jest
+
+Supertest
+
+They validate:
+
+API functionality
+
+Validation rules
+
+Journal creation
+
+Insights aggregation
+
+Demo Flow
+
+Create a journal entry
+
+Load entries
+
+Click analyze
+
+View emotional insights
+
+Load insights dashboard
+
+Environment Variables
+GEMINI_API_KEY=your_api_key
+Future Improvements
+
+User authentication
+
+Real-time analysis
+
+Vector search for journals
+
+Emotion trend visualization
+
+Multi-user support
+
+Cloud deployment
