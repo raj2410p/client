@@ -1,29 +1,12 @@
 {
-  "name": "client",
-  "version": "0.1.0",
+  "name": "fullstackassignment",
   "private": true,
-  "dependencies": {
-    "axios": "^1.8.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client && npm install --prefix backend/src",
+    "start": "node backend/src/server.js"
   }
 }
