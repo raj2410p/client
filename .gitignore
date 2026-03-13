@@ -2,6 +2,5 @@ node_modules
 client/node_modules
 backend/src/node_modules
 client/build
-backend/src/.env
 backend/src/journal.db
 .env
